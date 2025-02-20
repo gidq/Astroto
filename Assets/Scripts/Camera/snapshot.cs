@@ -18,14 +18,14 @@ public class Snapshot : MonoBehaviour
     {
         
         
-        Vector3 conversion = ConvertFromHorizontalToCartesian(148.88916f, 69.0604f);
-        Debug.Log(conversion);
+        //Vector3 conversion = ConvertFromHorizontalToCartesian(148.88916f, 69.0604f);
+        //Debug.Log(conversion);
 
-        Debug.Log($"Cartesian: {conversion.x}, {conversion.y}, {conversion.z}");
+        //Debug.Log($"Cartesian: {conversion.x}, {conversion.y}, {conversion.z}");
 
-        Debug.Log($"RA&DEC: {0f}&{0f} Dst: {(transform.position - conversion).magnitude}");
+        //Debug.Log($"RA&DEC: {0f}&{0f} Dst: {(transform.position - conversion).magnitude}");
 
-        ConvertFromCartesianToHorizontal(conversion);
+        //ConvertFromCartesianToHorizontal(conversion);
     }
 
     Vector3 ConvertFromHorizontalToCartesian(float RA, float DEC)
@@ -51,7 +51,7 @@ public class Snapshot : MonoBehaviour
 
         CamXRotation = Mathf.Clamp(CamXRotation, -90f, 90f);
 
-        float zValue = Mathf.Lerp(2f, -2f, (CamXRotation + 90f) / 180f);
+        float zValue = Mathf.Lerp(2f, -2f, (-CamXRotation + 90f) / 180f);
 
         Debug.Log($"Camera X Rotation: {CamXRotation}, Mapped Z Value: {zValue}");
 

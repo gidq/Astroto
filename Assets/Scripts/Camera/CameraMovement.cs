@@ -18,7 +18,7 @@ public class CameraMovement : MonoBehaviour
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
 
-        Vector3 rotateVector = new Vector3 (vertical, horizontal, 0);
+        Vector3 rotateVector = new Vector3 (-vertical, horizontal, 0);
         transform.Rotate(rotateVector * rotationSpeed);
 
         if (Input.GetKey(KeyCode.R))

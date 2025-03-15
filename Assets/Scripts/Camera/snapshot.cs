@@ -50,10 +50,12 @@ public class Snapshot : MonoBehaviour
             CamXRotation -= 360;
 
         CamXRotation = Mathf.Clamp(CamXRotation, -90f, 90f);
+        
 
         float zValue = Mathf.Lerp(2f, -2f, (-CamXRotation + 90f) / 180f);
 
         Debug.Log($"Camera X Rotation: {CamXRotation}, Mapped Z Value: {zValue}");
+        zValue = Mathf.Max(zValue, 0.1f);
 
         return zValue;
     }
@@ -66,16 +68,24 @@ public class Snapshot : MonoBehaviour
         float r = Mathf.Sqrt(x*x + y*y + z*z);
 
         ra = Mathf.Rad2Deg * Mathf.Atan2(y, x);
-        if (ra < 0) {
-            ra += 360;
+        if (ra < 0)
+        {
+            ra += 360; // Ensure RA is in the 0-360 range
         }
         dec = Mathf.Rad2Deg * Mathf.Asin(z / r);
+
+        // Round the values to the required precision
+        ra = (float)Math.Round(ra, 6);
+        dec = (float)Math.Round(dec, 5);
+
+        // Adjust DEC for horizon (if needed)
+        dec = Mathf.Clamp(dec + 90, -90, 90);
         Debug.Log($"RA: {ra} DEC: {dec}");
 
-        
-        searchByEQCoords.Scrape(ra, dec);
 
-        
+        //searchByEQCoords.Scrape(ra, dec);
+
+
     }
 
     double CalculateLST(double GST, double lon)
